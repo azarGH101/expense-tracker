@@ -208,6 +208,7 @@ logoutBtn.addEventListener("click",(event)=>{
 
     if(usersBlock.classList.contains("formHide")) {
         usersBlock.classList.remove("formHide");
+        wrapperBlock.style.display = 'none';
         usersBlock.style.display = 'flex';
         invalidUser.innerHTML = '';
         console.log(`Logout Successfully`);       
