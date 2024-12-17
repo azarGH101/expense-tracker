@@ -1,0 +1,503 @@
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        background-color: bisque;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    /* ACCOUNT CREATED POPUP */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px 30px;
+        background-color: #4caf50;
+        color: white;
+        font-size: 18px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+    }
+    
+    .popup.show {
+        display: block;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    .close-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        position: absolute;
+        top: 5px;
+        right: 10px;
+    }
+    
+    .close-btn:hover {
+        color: #d7d7d7;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -60%);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+        }
+    }
+    
+
+    .modal {
+        position: absolute;
+        display: none;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: 100;
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Close Button */
+    .close {
+        position: absolute;
+        background-color: red;
+        color: white;
+        top: 0;
+        left: 98%;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .modal table {
+        position: absolute;
+        display: table;
+        background-color: white;
+        width: 70%;
+        left: 0;
+        top: 0;
+        margin: 0 15%;
+        border-collapse: collapse;
+        z-index: 99;
+    }
+
+    .modal table thead {
+        position: sticky;
+        top: 0;
+    }
+
+    .modal table tfoot {
+        position: sticky;
+        bottom: 0;
+    }
+
+    .modal table:focus {
+        outline: none;
+    }
+    .modal table, th, td {
+        border: 1px solid #ddd;
+    }
+    th, td {
+        padding: 8px 12px;
+        text-align: left;
+    }
+    th {
+        background-color: #f4f4f4;
+    }
+
+    .users {
+        position: absolute;        
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: rgb(69,0,158);
+        background: linear-gradient(90deg, rgba(69,0,158,1) 3%, rgba(201,0,255,1) 100%);
+        opacity: 0;
+        z-index: 98;
+    }
+
+    .users .register {
+        width: 40vw;
+        max-width: 650px;
+        display: none;
+        background-color: rgb(240, 240, 240);
+        border-radius: 10px;
+        padding: 25px;
+        opacity: 0;
+    }
+
+    .users .logIn {
+        width: 40vw;
+        max-width: 650px;
+        display: none;
+        background-color: rgb(240, 240, 240);
+        border-radius: 10px;
+        padding: 25px;
+        opacity: 0;
+    }
+
+    #heading {
+        text-align: center;
+        margin-bottom: 15px;
+        font-size: 2rem;
+        color: rgb(175, 6, 175);
+    }
+
+    .users label {
+        display: block;
+        font-size: 1.15rem;
+        margin-bottom: 5px;
+    }
+
+    .users .error {
+        color: red;
+        font-size: 1.15rem;
+        margin-bottom: 10px;
+    }
+
+    .users input {
+        position: relative;
+        width: 95%;
+        border: 2px solid aquamarine;
+        padding: 7px;
+        border-radius: 5px;
+    }
+
+    .users input:focus, .users #submit:focus {
+        outline: none;
+    }
+
+    .users .inpError {
+        border: 2px solid red;
+    }
+
+    .users .loginLink,
+    .users .signUpLink {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .users .loginLink a,
+    .users .signUpLink a {
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .users .submit {
+        border: none;
+        border-radius: 5px;
+        background-color: darkorchid;
+        color: whitesmoke;
+        font-size: 1.15rem;
+        padding: 10px;
+        width: 100%;
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+    .users #errorMsg {
+        text-align: center;
+        color: red;
+        font-size: 1.2rem;
+        margin-top: 10px;
+    }
+
+    .formHide {
+        animation: opacityDrop 0.6s ease-out backwards;
+    }
+
+    .formShow {
+        animation: opacityUp 0.6s ease-in forwards;
+    }
+
+    @keyframes opacityDrop {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes opacityUp {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    .wrapper {
+        z-index: 1;
+        margin: 0;
+        max-height: 100vh;
+        display: none;
+    }
+
+    #appTitle {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 2rem;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .tracker {
+        max-width: 420px;
+        background-color: white;
+        padding: 15px;
+        margin: 20px auto 0;
+        border-radius: 5px;
+        z-index: 10;
+    }
+
+    .statement {
+        background-color: rgb(1, 1, 177);
+        color: white;
+        border-radius: 5px;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .statement .welcomeMsg {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .statement .welcomeMsg button {
+        border: none;
+        outline: none;
+        background-color: whitesmoke;
+        color: blue;
+        font-size: 1.05rem;
+        padding: 7px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .statement .welcomeMsg button:hover,
+    .statement .welcomeMsg button:focus {
+        border: none;
+        outline: none;
+    }
+
+    .statement .welcomeMsg p {
+        text-align: left;
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+    }
+
+    .budget {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+    }
+
+    #balance {
+        font-size: 2.5rem;
+    }
+
+    .statement h4 {
+        font-size: 1.1rem;
+    }
+
+    #income, #expense {
+        font-size: 1.65rem;
+    }
+
+    .transactionDiv {
+        margin-bottom: 10px;
+        max-height: 20vh; 
+        overflow-y: auto;
+    }
+
+    .transactionDiv:focus {
+        outline: none;
+    }
+
+    .transactionDiv #title {
+        font-size: 1.75rem;
+    }
+
+    .transaction {
+        margin-top: 10px;
+    }
+
+    .transDetails {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        font-size: 1.1rem;
+    }
+
+    .rightFlex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .delTransIcon {
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        padding-left: 10px;
+    }
+
+    .viewTransactions {
+        text-align: center;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .viewTransactions a {
+        text-decoration: none;
+        color: blue;
+        font-size: 1.1rem;
+        display: none;
+    }
+
+    .addTrans {
+        margin-bottom: 15px;
+    }
+
+    .addTrans h2 {
+        font-size: 1.65rem;
+        margin-bottom: 10px;
+    }
+
+    button {
+        border: none;
+        outline: none;
+        background-color: transparent;
+    }
+
+    .addTrans button:focus, .addTrans button:hover {
+        border: none;
+        outline: none;
+    }
+
+    .expenseControl {
+        background-color: rgb(232, 232, 232);
+        padding: 5px 0;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    #expenseBtn, #incomeBtn {
+        position: relative;
+        border: none;
+        outline: none;
+        /* background-color: rgb(232, 232, 232); */
+        width: 47%;
+        font-size: 1rem;
+        padding: 5px 0;
+        cursor: pointer;
+    }
+
+    .buttonFocus {
+        background-color: white;
+        border-radius: 5px;
+        /* border: 0.75px solid rgb(215, 215, 215); */
+        box-shadow: 0 0 8px rgba(95, 95, 95, 0.6);
+    }
+
+    form {
+        position: relative;
+        margin-bottom: 10px;
+    }
+
+    input {
+        border: 2px solid lightgrey;
+        background-color: white;
+        font-size: 1.15rem;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    .trsName, .transAmount, .transdate {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .amount_date {
+        position: relative;
+        width: 100%;
+        display: flex;
+    }
+
+    .transAmount {
+        width: 48%;
+        margin-right: 2%;
+    }
+
+    .transDate {
+        width: 48%;
+        margin-left: 2%;
+    }
+
+    .transDate input {
+        width: 92%;
+        margin-top: 5px;
+        font-size: 1.15rem;
+    }
+
+    form label {
+        margin-bottom: 5px;
+    }
+
+    #submitBtn {
+        position: relative;
+        width: 100%;
+        background-color: rgb(1, 1, 177);
+        color: white;
+        font-size: 1.1rem;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    @media (max-width:480px) {
+        .tracker {
+            max-width: 300px;
+            padding: 10px;
+        }
+        .users .register {
+            width: 80vw;
+        }
+        .users .logIn {
+            width: 80vw;
+        }
+    }

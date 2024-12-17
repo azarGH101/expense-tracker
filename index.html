@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./expense_tracker.css" type="text/css">
+    <title>Expense Tracker</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="successPopup" class="popup">
+        <span class="popup-message">Account created successfully!</span>
+        <button class="close-btn" onclick="closePopup()">×</button>
+    </div>    
+    <div class="users">
+        <div class="register">
+            <h2 id="heading">Register</h2>
+            <!-- action="/submit" method="post" -->
+            <form id="myUserForm" autocomplete="off">  
+                <!-- USRNAME TEXT -->
+                <label for="fullname">Full Name</label>
+                <input type="text" id="full_name" class="input">
+                <p class="error" id="fnameErr"></p>
+                <!-- USRNAME TEXT -->
+                <label for="username">Username</label>
+                <input type="text" id="user_name" class="input">
+                <p class="error" id="unameErr"></p>
+                <!-- Email -->
+                <label for="email">Email</label>
+                <input type="email" id="mail" class="input">
+                <p class="error" id="emailErr"></p>
+                <!-- Password -->
+                <label for="password">Password</label>
+                <input type="password" id="pwd" class="input">
+                <p class="error" id="pwdErr"></p>
+                <!-- Confirm Password -->
+                <label for="con_pwd">Confirm Password</label>
+                <input type="password" id="confirm_pwd" class="input">
+                <p class="error"  id="cPswdErr"></p>
+                <!-- submit button -->
+                <button id="signUpSubmit" class="submit">Submit</button>
+                <div class="loginLink">
+                    <a href="#" id="existUser">Existing User</a>
+                </div> 
+            </form>
+        </div>
+        <div class="logIn">
+            <h2 id="heading">Login</h2>
+            <!-- action="/submit" method="post" -->
+            <form id="myUserLoginForm">  
+                <!-- USRNAME TEXT -->
+                <label for="username1">Username</label>
+                <input type="text" id="user_name1" class="input">
+                <p class="error" id="unameErr1"></p>
+                <!-- Password -->
+                <label for="password">Password</label>
+                <input type="password" id="pwd1" class="input">
+                <p class="error" id="pswdErr1"></p>
+                <!-- submit button -->
+                <button id="logInSubmit" class="submit">Submit</button>
+                <div class="signUpLink">
+                    <a href="#" id="newUser">New User</a>
+                </div> 
+                <div class="invalidUser">
+                    <p id="errorMsg"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <h2 id="appTitle">Expense Tracker</h2>
+        <div class="tracker">
+            <!-- STATEMENT SECTION STARTED -->
+            <div class="statement">
+                <div class="welcomeMsg">
+                    <p>Welcome : <span id="nameOfUser"></span></p>
+                    <button id="logoutBtn">Logout</button>
+                </div>
+                <div class="balanceDiv">
+                    <h4>TOTAL BALANCE</h4>
+                    <h2 id="balance">&#8377; <span id="balance_amount"></span></h2>
+                </div>     
+                <div class="budget">
+                    <div class="income">
+                        <h4>INCOME</h4>
+                        <h3 id="income">&#8377; <span id="income_amount"></span></h3>
+                    </div>
+                    <div class="expense">
+                        <h4>EXPENSE</h4>
+                        <h3 id="expense">&#8377; <span id="expense_amount"></span></h3>
+                    </div>
+                </div>
+            </div>
+            <!-- STATEMENT SECTION ENDED -->
+
+            <!-- POPUP SECTION STARTED -->
+            <div id="myModal" class="modal">
+                <!-- <div class="modal_content"> -->
+                    <span class="close">&times;</span>
+                    <!-- <h3 id="fnameUser">Full Name of the User : </h3> -->
+                    <table id="transactionTable">
+                        <thead>
+                            <tr>
+                                <th colspan="5">Full Name of the User : <span id="fnameUser"></span></th>
+                            </tr>
+                            <tr>
+                                <th>S.No.</th>
+                                <th>Transaction Type</th>
+                                <th>Transaction Title</th>
+                                <th>Amount &#8377;</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- <tr>
+                                <td>1</td>
+                                <td>02.11.2024</td>
+                                <td>Monthly Salary</td>
+                                <td>23000</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr> -->
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="2">Total Income : <span id="totalIncomeSpan"></span></th>
+                                <th colspan="3 ">Total Expense : <span id="totalExpenseSpan"></span></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                <!-- </div> -->
+            </div>
+            <!-- POPUP SECTION ENDED -->
+            
+            <!-- TRANSACTION SECTION STARTED -->
+            <div class="transactionDiv">
+                <h3 id="title">Transactions</h3>                
+                <!-- <div class="transaction">
+                    <div class="transDetails">
+                        <h3 id="transName">HairCut</h3>
+                        <div class="rightFlex">
+                            <h3 id="transAmount">&#8377; <span id="transAmountVal">100</span></h3>
+                            <img src="./delete.png" alt="delete_icon" class="delTransIcon">
+                        </div>
+                    </div>
+                    <p id="transDate">15/11/2024</p>
+                </div> -->
+                <div class="viewTransactions">
+                    <a id="viewAllTrans" href="">View All Transactions</a>
+                    <a id="removeAllTrans" href="">Clear All Transactions</a>
+                </div>
+            </div>
+            <!-- TRANSACTION SECTION ENDED -->
+            
+            <!-- ADD TRANSACTION SECTION STARTED -->
+            <div class="addTrans">
+                <h2>Add Transaction</h2>
+                <div class="expenseControl">
+                    <button id="expenseBtn">EXPENSE</button>
+                    <button id="incomeBtn">INCOME</button>
+                </div>
+            </div>
+            <!-- ADD TRANSACTION SECTION ENDED -->
+
+            <!-- FORM SECTION STARTED -->
+            <form action="" id="expTrackerForm" class="submitReport" autocomplete="off">
+                <div class="trsName">
+                    <label for="transName">NAME</label>
+                    <input type="text" name="transName" id="transNameField" required>
+                </div>
+                <div class="amount_date">
+                    <div class="transAmount">
+                        <label for="transAmount">AMOUNT</label>
+                        <input type="number" name="transAmount" id="transAmountField" required>
+                    </div>
+                    <div class="transDate">
+                        <label for="transDate">DATE</label>
+                        <input type="date" name="transDate" id="transDateField" required>
+                    </div>
+                </div>
+                <button id="submitBtn">SUBMIT</button>
+            </form>
+            <!-- FORM SECTION ENDED -->
+        </div>
+    </div>
+    <script src="./class.js"></script>
+    <script src="./formValidation.js"></script>
+    <script src="./expense_trancker.js"></script>
+</body>
+</html>
