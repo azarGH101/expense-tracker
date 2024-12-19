@@ -499,19 +499,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Listen for the 'beforeunload' event
-window.addEventListener('beforeunload', function() {
-    // Save the TRANSACTION data to localStorage
-    const transArray = protectedTransArray.getAllTransactions(MPIN);
-    localStorage.setItem(TR_LocalStorageName, JSON.stringify(transArray));
-    // SAVE USER LIST TO LOCALSTORAGE
-    // const userListArray = protectedUsers.getAllUsers(MPIN);
-    // localStorage.setItem(UL_LocalStorageName, JSON.stringify(userListArray));
-});
-
 // Save data to localStorage on visibility change
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
+        // Save the TRANSACTION data to localStorage
+        const transArray = protectedTransArray.getAllTransactions(MPIN);
+        localStorage.setItem(TR_LocalStorageName, JSON.stringify(transArray));
         // SAVE USER LIST TO LOCALSTORAGE
         const userListArray = protectedUsers.getAllUsers(MPIN);
         localStorage.setItem(UL_LocalStorageName, JSON.stringify(userListArray));
