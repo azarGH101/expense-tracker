@@ -512,7 +512,6 @@ window.addEventListener('beforeunload', function() {
 // Save data to localStorage on visibility change
 document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
-        // Save user details into localStorage
         // SAVE USER LIST TO LOCALSTORAGE
         const userListArray = protectedUsers.getAllUsers(MPIN);
         localStorage.setItem(UL_LocalStorageName, JSON.stringify(userListArray));
